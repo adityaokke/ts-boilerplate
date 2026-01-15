@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package sample;
+
+service SampleService {
+  rpc CreateSample (CreateSampleRequest) returns (SampleResponse);
+  rpc GetSample (GetSampleRequest) returns (SampleResponse);
+  rpc ListSamples (ListSamplesRequest) returns (ListSamplesResponse);
+}
+
+message CreateSampleRequest {
+  string name = 1;
+  optional string description = 2;
+}
+
+message GetSampleRequest {
+  string id = 1;
+}
+
+message ListSamplesRequest {
+  int32 page = 1;
+  int32 limit = 2;
+}
+
+message SampleResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string status = 4;
+  string created_at = 5;
+  string updated_at = 6;
+}
+
+message ListSamplesResponse {
+  repeated SampleResponse data = 1;
+  PageInfo meta = 2;
+}
+
+message PageInfo {
+  int32 page = 1;
+  int32 limit = 2;
+  int32 total = 3;
+  int32 total_pages = 4;
+  bool has_next = 5;
+  bool has_prev = 6;
+}

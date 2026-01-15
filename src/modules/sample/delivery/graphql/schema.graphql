@@ -1,0 +1,33 @@
+type Sample {
+  id: ID!
+  name: String!
+  description: String
+  status: SampleStatus!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum SampleStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+type SampleConnection {
+  data: [Sample!]!
+  meta: PageInfo!
+}
+
+input CreateSampleInput {
+  name: String!
+  description: String
+}
+
+type Query {
+  sample(id: ID!): Sample
+  samples(page: Int, limit: Int): SampleConnection!
+}
+
+type Mutation {
+  createSample(input: CreateSampleInput!): Sample!
+}
