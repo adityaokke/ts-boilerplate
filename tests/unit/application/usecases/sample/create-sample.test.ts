@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { CreateSampleUseCase } from '@modules/sample/application/usecases/create-sample.js';
+import { CreateSampleImpl } from '@modules/sample/application/usecases/create-sample.js';
 import { ValidationError, ConflictError } from '@shared/application/errors/index.js';
 
-describe('CreateSampleUseCase', () => {
+describe('CreateSampleImpl', () => {
   const mockSampleRepository = {
     save: vi.fn(),
     findById: vi.fn(),
@@ -26,11 +26,11 @@ describe('CreateSampleUseCase', () => {
     debug: vi.fn(),
   };
 
-  let useCase: CreateSampleUseCase;
+  let useCase: CreateSampleImpl;
 
   beforeEach(() => {
     vi.clearAllMocks();
-    useCase = new CreateSampleUseCase(mockSampleRepository, mockEventPublisher, mockLogger);
+    useCase = new CreateSampleImpl(mockSampleRepository, mockEventPublisher, mockLogger);
   });
 
   it('should create a sample successfully', async () => {

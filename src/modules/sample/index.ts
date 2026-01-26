@@ -3,34 +3,34 @@
 
 // Domain exports
 export { Sample, SampleStatus } from './domain/entities/sample.js';
-export type { SampleRepositoryPort } from './domain/ports/outbound/sample-repository.js';
+export type { SampleRepository } from './domain/interfaces/sample-repository.js';
 export type {
   CreateSample,
   CreateSampleInput,
   CreateSampleOutput,
-} from './domain/ports/inbound/create-sample.js';
-export type { GetSample, GetSampleInput } from './domain/ports/inbound/get-sample.js';
-export type { ListSamples, ListSamplesInput } from './domain/ports/inbound/list-samples.js';
+} from './domain/interfaces/create-sample.js';
+export type { GetSample, GetSampleInput } from './domain/interfaces/get-sample.js';
+export type { ListSamples, ListSamplesInput } from './domain/interfaces/list-samples.js';
 export { SAMPLE_EVENTS } from './domain/events/index.js';
 export type { SampleCreatedPayload } from './domain/events/sample-created.js';
 export type { SampleUpdatedPayload } from './domain/events/sample-updated.js';
 export type { SampleArchivedPayload } from './domain/events/sample-archived.js';
 
 // Application exports (use cases)
-export { CreateSampleUseCase } from './application/usecases/create-sample.js';
-export { CreateSampleWithClientUseCase } from './application/usecases/create-sample-with-client.js';
-export { GetSampleUseCase } from './application/usecases/get-sample.js';
-export { ListSamplesUseCase } from './application/usecases/list-samples.js';
+export { CreateSampleImpl } from './application/usecases/create-sample.js';
+export { CreateSampleWithClientImpl } from './application/usecases/create-sample-with-client.js';
+export { GetSampleImpl } from './application/usecases/get-sample.js';
+export { ListSamplesImpl } from './application/usecases/list-samples.js';
 
 // Infrastructure exports
-export { SampleRepository } from './infrastructure/repositories/sample-repository.js';
+export { SampleRepositoryImpl } from './infrastructure/repositories/sample-repository.js';
 export { createSampleIndexes } from './infrastructure/schemas/indexes.js';
-export { SampleClient } from './infrastructure/clients/sample-client.js';
+export { SampleClientImpl } from './infrastructure/clients/sample-client.js';
 export type {
-  SampleClientPort,
+  SampleClient,
   SampleClientResponse,
   SampleClientError,
-} from './domain/ports/outbound/sample-client.js';
+} from './domain/interfaces/sample-client.js';
 
 // Delivery exports
 export { SampleController } from './delivery/http/controller.js';

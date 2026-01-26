@@ -1,1 +1,1 @@
-export { SampleRepository } from './sample-repository.js';
+export { SampleRepositoryImpl } from './sample-repository.js';

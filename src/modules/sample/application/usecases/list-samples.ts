@@ -1,11 +1,11 @@
 import { ok, type Result } from '@shared/common/types/result.js';
 import type { Sample } from '../../domain/entities/sample.js';
-import type { SampleRepositoryPort } from '../../domain/ports/outbound/sample-repository.js';
-import type { ListSamples, ListSamplesInput } from '../../domain/ports/inbound/list-samples.js';
+import type { SampleRepository } from '../../domain/interfaces/sample-repository.js';
+import type { ListSamples, ListSamplesInput } from '../../domain/interfaces/list-samples.js';
 import type { PaginatedResult } from '@shared/application/dtos/pagination.js';
 
-export class ListSamplesUseCase implements ListSamples {
-  constructor(private readonly sampleRepository: SampleRepositoryPort) {}
+export class ListSamplesImpl implements ListSamples {
+  constructor(private readonly sampleRepository: SampleRepository) {}
 
   async execute(input: ListSamplesInput): Promise<Result<PaginatedResult<Sample>, Error>> {
     const page = input.page ?? 1;

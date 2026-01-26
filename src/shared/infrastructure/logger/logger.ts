@@ -1,8 +1,8 @@
 import pino from 'pino';
-import type { Logger, LogContext } from '@shared/domain/ports/logger.js';
-import { config } from '@shared/infrastructure/config/env.js';
+import type { Logger, LogContext } from '@shared/domain/interfaces/index.js';
+import { config } from '@shared/infrastructure/config/index.js';
 
-export class PinoLogger implements Logger {
+export class LoggerImpl implements Logger {
   private readonly logger: pino.Logger;
 
   constructor(baseLogger?: pino.Logger) {
@@ -40,8 +40,8 @@ export class PinoLogger implements Logger {
   }
 
   child(context: LogContext): Logger {
-    return new PinoLogger(this.logger.child(context));
+    return new LoggerImpl(this.logger.child(context));
   }
 }
 
-export const rootLogger = new PinoLogger();
+export const rootLogger = new LoggerImpl();

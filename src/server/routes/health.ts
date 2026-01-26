@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { checkMongoHealth } from '@shared/infrastructure/database/mongodb/connection.js';
-import { checkRedisHealth } from '@shared/infrastructure/cache/redis/connection.js';
+import { checkMongoHealth } from '@shared/infrastructure/database/index.js';
+import { checkRedisHealth } from '@shared/infrastructure/cache/index.js';
 
 export const healthRoutes = (): Router => {
   const router = Router();

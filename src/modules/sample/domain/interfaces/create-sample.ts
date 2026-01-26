@@ -1,18 +1,18 @@
 import type { Result } from '@shared/common/types/result.js';
 
-export type CreateSampleInput = {
+export interface CreateSampleInput {
   name: string;
   description?: string;
   metadata?: Record<string, unknown>;
-};
+}
 
-export type CreateSampleOutput = {
+export interface CreateSampleOutput {
   id: string;
   name: string;
   status: string;
   createdAt: Date;
-};
+}
 
-export type CreateSample = {
-  execute: (input: CreateSampleInput) => Promise<Result<CreateSampleOutput, Error>>;
-};
+export interface CreateSample {
+  execute(input: CreateSampleInput): Promise<Result<CreateSampleOutput, Error>>;
+}

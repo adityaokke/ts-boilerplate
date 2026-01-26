@@ -1,6 +1,6 @@
-import type { CreateSample } from '../../domain/ports/inbound/create-sample.js';
-import type { GetSample } from '../../domain/ports/inbound/get-sample.js';
-import type { ListSamples } from '../../domain/ports/inbound/list-samples.js';
+import type { CreateSample } from '../../domain/interfaces/create-sample.js';
+import type { GetSample } from '../../domain/interfaces/get-sample.js';
+import type { ListSamples } from '../../domain/interfaces/list-samples.js';
 import type { Sample } from '../../domain/entities/sample.js';
 
 type GrpcCallback<T> = (err: Error | null, response?: T) => void;

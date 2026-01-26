@@ -1,6 +1,6 @@
 import type { Db, WithId, Document, Filter } from 'mongodb';
 import type { Sample, SampleStatus } from '../../domain/entities/sample.js';
-import type { SampleRepositoryPort } from '../../domain/ports/outbound/sample-repository.js';
+import type { SampleRepository } from '../../domain/interfaces/sample-repository.js';
 
 type SampleDocument = {
   _id: string;
@@ -34,7 +34,7 @@ const toEntity = (doc: WithId<Document>): Sample => ({
 
 const byId = (id: string): Filter<Document> => ({ _id: id } as unknown as Filter<Document>);
 
-export class SampleRepository implements SampleRepositoryPort {
+export class SampleRepositoryImpl implements SampleRepository {
   private readonly collection;
 
   constructor(private readonly db: Db) {

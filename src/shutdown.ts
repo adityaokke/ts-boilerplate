@@ -1,8 +1,8 @@
 import type { AwilixContainer } from 'awilix';
 import type { Cradle } from './container.js';
 import { stopHttpServer } from './server/http.js';
-import { disconnectMongo } from './shared/infrastructure/database/mongodb/connection.js';
-import { disconnectRedis } from './shared/infrastructure/cache/redis/connection.js';
+import { disconnectMongo } from './shared/infrastructure/database/index.js';
+import { disconnectRedis } from './shared/infrastructure/cache/index.js';
 
 export const shutdown = async (
   container: AwilixContainer<Cradle>,

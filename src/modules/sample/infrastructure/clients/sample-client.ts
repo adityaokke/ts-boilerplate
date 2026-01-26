@@ -1,28 +1,26 @@
 import { ok, err, type Result } from '@shared/common/types/result.js';
-import type { Config } from '@shared/infrastructure/config/env.js';
-import type { Logger } from '@shared/domain/ports/logger.js';
+import type { Config } from '@shared/infrastructure/config/index.js';
+import type { Logger } from '@shared/domain/interfaces/index.js';
 import type {
-  SampleClientPort,
+  SampleClient,
   SampleClientResponse,
   SampleClientError,
-} from '../../domain/ports/outbound/sample-client.js';
+} from '../../domain/interfaces/sample-client.js';
 
 /**
- * SampleClient - HTTP implementation of SampleClientPort
+ * SampleClientImpl - HTTP implementation of SampleClient
  *
  * This client handles REST API communication with external services.
  * Replace the baseUrl with your actual external service URL.
  *
  * Naming convention for clients:
- * - SampleClient (this example)
- * - XenditClient (for Xendit payment API)
- * - StripeClient (for Stripe API)
- * - InventoryServiceClient (for another microservice)
+ * - Interface: SampleClient
+ * - Implementation: SampleClientImpl
  *
  * Usage in use case:
  * ```typescript
  * constructor(
- *   private readonly sampleClient: SampleClientPort,
+ *   private readonly sampleClient: SampleClient,
  * ) {}
  *
  * async execute(input) {
@@ -34,7 +32,7 @@ import type {
  * }
  * ```
  */
-export class SampleClient implements SampleClientPort {
+export class SampleClientImpl implements SampleClient {
   private readonly baseUrl: string;
   private readonly timeout: number;
 

@@ -1,1 +1,1 @@
-export { PinoLogger, rootLogger } from './pino.js';
+export { LoggerImpl, rootLogger } from './logger.js';

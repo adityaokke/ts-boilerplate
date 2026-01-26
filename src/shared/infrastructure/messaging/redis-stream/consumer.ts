@@ -1,6 +1,6 @@
 import type { Redis } from 'ioredis';
-import type { Logger } from '@shared/domain/ports/logger.js';
-import { config } from '@shared/infrastructure/config/env.js';
+import type { Logger } from '@shared/domain/interfaces/index.js';
+import { config } from '@shared/infrastructure/config/index.js';
 import { sleep } from '@shared/common/utils/async.js';
 
 type EventHandler<T = unknown> = (id: string, data: T) => Promise<void>;

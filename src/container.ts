@@ -15,37 +15,35 @@ import type { Db } from "mongodb";
 import type { Redis } from "ioredis";
 
 // Shared infrastructure
-import { config, type Config } from "./shared/infrastructure/config/env.js";
-import { connectMongo } from "./shared/infrastructure/database/mongodb/connection.js";
-import { connectRedis } from "./shared/infrastructure/cache/redis/connection.js";
-import { RedisCache } from "./shared/infrastructure/cache/redis/cache.js";
-import { RedisEventPublisher } from "./shared/infrastructure/messaging/redis-stream/publisher.js";
-import { RedisStreamConsumer } from "./shared/infrastructure/messaging/redis-stream/consumer.js";
-import { PinoLogger } from "./shared/infrastructure/logger/pino.js";
+import { config, type Config } from "./shared/infrastructure/config/index.js";
+import { connectMongo } from "./shared/infrastructure/database/index.js";
+import { connectRedis, CacheImpl } from "./shared/infrastructure/cache/index.js";
+import { EventPublisherImpl, RedisStreamConsumer } from "./shared/infrastructure/messaging/index.js";
+import { LoggerImpl } from "./shared/infrastructure/logger/index.js";
 
-// Shared domain ports
-import type { EventPublisher } from "./shared/domain/ports/event-publisher.js";
-import type { Cache } from "./shared/domain/ports/cache.js";
-import type { Logger } from "./shared/domain/ports/logger.js";
+// Shared domain interfaces
+import type { EventPublisher } from "./shared/domain/interfaces/index.js";
+import type { Cache } from "./shared/domain/interfaces/index.js";
+import type { Logger } from "./shared/domain/interfaces/index.js";
 
 // Sample module
 import {
-  SampleRepository,
-  CreateSampleUseCase,
-  CreateSampleWithClientUseCase,
-  GetSampleUseCase,
-  ListSamplesUseCase,
+  SampleRepositoryImpl,
+  CreateSampleImpl,
+  CreateSampleWithClientImpl,
+  GetSampleImpl,
+  ListSamplesImpl,
   SampleController,
   SampleCreatedHandler,
   SampleUpdatedHandler,
-  SampleClient,
+  SampleClientImpl,
   SAMPLE_EVENTS,
 } from "./modules/sample/index.js";
 import type {
-  SampleRepositoryPort,
+  SampleRepository,
   SampleCreatedPayload,
   SampleUpdatedPayload,
-  SampleClientPort,
+  SampleClient,
 } from "./modules/sample/index.js";
 
 // Server
@@ -67,12 +65,12 @@ export type Cradle = {
   streamConsumer: RedisStreamConsumer;
 
   // Sample Module
-  sampleRepository: SampleRepositoryPort;
-  sampleClient: SampleClientPort;
-  createSampleUseCase: CreateSampleUseCase;
-  createSampleWithClientUseCase: CreateSampleWithClientUseCase;
-  getSampleUseCase: GetSampleUseCase;
-  listSamplesUseCase: ListSamplesUseCase;
+  sampleRepository: SampleRepository;
+  sampleClient: SampleClient;
+  createSampleUseCase: CreateSampleImpl;
+  createSampleWithClientUseCase: CreateSampleWithClientImpl;
+  getSampleUseCase: GetSampleImpl;
+  listSamplesUseCase: ListSamplesImpl;
   sampleController: SampleController;
 
   // Express
@@ -97,7 +95,7 @@ export const createAppContainer = async (): Promise<
 
   // Logger - singleton
   container.register({
-    logger: asClass(PinoLogger).singleton(),
+    logger: asClass(LoggerImpl).singleton(),
   });
 
   // Infrastructure connections
@@ -112,8 +110,8 @@ export const createAppContainer = async (): Promise<
 
   // Infrastructure services - singletons
   container.register({
-    cache: asClass(RedisCache).singleton(),
-    eventPublisher: asClass(RedisEventPublisher).singleton(),
+    cache: asClass(CacheImpl).singleton(),
+    eventPublisher: asClass(EventPublisherImpl).singleton(),
     streamConsumer: asClass(RedisStreamConsumer).singleton(),
   });
 
@@ -123,20 +121,20 @@ export const createAppContainer = async (): Promise<
 
   // Repositories
   container.register({
-    sampleRepository: asClass(SampleRepository).singleton(),
+    sampleRepository: asClass(SampleRepositoryImpl).singleton(),
   });
 
   // Clients (external services / 3rd party APIs)
   container.register({
-    sampleClient: asClass(SampleClient).singleton(),
+    sampleClient: asClass(SampleClientImpl).singleton(),
   });
 
   // Use Cases
   container.register({
-    createSampleUseCase: asClass(CreateSampleUseCase).singleton(),
-    createSampleWithClientUseCase: asClass(CreateSampleWithClientUseCase).singleton(),
-    getSampleUseCase: asClass(GetSampleUseCase).singleton(),
-    listSamplesUseCase: asClass(ListSamplesUseCase).singleton(),
+    createSampleUseCase: asClass(CreateSampleImpl).singleton(),
+    createSampleWithClientUseCase: asClass(CreateSampleWithClientImpl).singleton(),
+    getSampleUseCase: asClass(GetSampleImpl).singleton(),
+    listSamplesUseCase: asClass(ListSamplesImpl).singleton(),
   });
 
   // Controllers

@@ -1,14 +1,14 @@
 import type { Result } from '@shared/common/types/result.js';
 
 /**
- * SampleClientPort
+ * SampleClient
  *
  * Defines the contract for communicating with external services via REST API.
- * The implementation (SampleClient) lives in infrastructure/clients/.
+ * The implementation (SampleClientImpl) lives in infrastructure/clients/.
  *
  * Naming convention:
- * - Port (interface): {Name}ClientPort (e.g., XenditClientPort, StripeClientPort)
- * - Implementation: {Name}Client (e.g., XenditClient, StripeClient)
+ * - Interface: {Name}Client (e.g., XenditClient, StripeClient)
+ * - Implementation: {Name}ClientImpl (e.g., XenditClientImpl, StripeClientImpl)
  * - Response type: {Name}ClientResponse
  * - Error type: {Name}ClientError
  */
@@ -26,7 +26,7 @@ export interface SampleClientError {
   statusCode?: number;
 }
 
-export interface SampleClientPort {
+export interface SampleClient {
   /**
    * Fetch data from external service by ID
    */

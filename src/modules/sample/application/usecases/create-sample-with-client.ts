@@ -1,20 +1,20 @@
 import { ok, err, type Result } from '@shared/common/types/result.js';
 import { Sample } from '../../domain/entities/sample.js';
-import type { SampleRepositoryPort } from '../../domain/ports/outbound/sample-repository.js';
-import type { SampleClientPort } from '../../domain/ports/outbound/sample-client.js';
-import type { EventPublisher } from '@shared/domain/ports/event-publisher.js';
-import type { Logger } from '@shared/domain/ports/logger.js';
+import type { SampleRepository } from '../../domain/interfaces/sample-repository.js';
+import type { SampleClient } from '../../domain/interfaces/sample-client.js';
+import type { EventPublisher } from '@shared/domain/interfaces/index.js';
+import type { Logger } from '@shared/domain/interfaces/index.js';
 import type {
   CreateSample,
   CreateSampleInput,
   CreateSampleOutput,
-} from '../../domain/ports/inbound/create-sample.js';
+} from '../../domain/interfaces/create-sample.js';
 import { createSampleCreatedEvent } from '../../domain/events/sample-created.js';
 import { ValidationError, ConflictError } from '@shared/application/errors/index.js';
 import { createSampleSchema } from '../validators/create-sample.js';
 
 /**
- * CreateSampleWithClientUseCase
+ * CreateSampleWithClientImpl
  *
  * Example use case that demonstrates how to use SampleClient
  * to sync data with another service or 3rd party API.
@@ -32,10 +32,10 @@ import { createSampleSchema } from '../validators/create-sample.js';
  * - For inventory sync: Replace with InventoryServiceClient
  * - For notifications: Replace with TwilioClient or SendGridClient
  */
-export class CreateSampleWithClientUseCase implements CreateSample {
+export class CreateSampleWithClientImpl implements CreateSample {
   constructor(
-    private readonly sampleRepository: SampleRepositoryPort,
-    private readonly sampleClient: SampleClientPort,
+    private readonly sampleRepository: SampleRepository,
+    private readonly sampleClient: SampleClient,
     private readonly eventPublisher: EventPublisher,
     private readonly logger: Logger,
   ) {}

@@ -69,7 +69,7 @@ Next steps:
    src/modules/your-module/
    ├── domain/
    │   ├── entities/
-   │   ├── ports/
+   │   ├── interfaces/
    │   ├── events/
    │   └── errors/
    ├── application/

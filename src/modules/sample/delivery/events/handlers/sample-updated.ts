@@ -1,6 +1,6 @@
 import type { DomainEvent } from '@shared/domain/events/domain-event.js';
 import type { SampleUpdatedPayload } from '../../../domain/events/sample-updated.js';
-import type { Logger } from '@shared/domain/ports/logger.js';
+import type { Logger } from '@shared/domain/interfaces/index.js';
 
 export class SampleUpdatedHandler {
   constructor(private readonly logger: Logger) {}

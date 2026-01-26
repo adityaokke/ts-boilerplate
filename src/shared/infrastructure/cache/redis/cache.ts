@@ -1,7 +1,7 @@
 import type { Redis } from 'ioredis';
-import type { Cache } from '@shared/domain/ports/cache.js';
+import type { Cache } from '@shared/domain/interfaces/index.js';
 
-export class RedisCache implements Cache {
+export class CacheImpl implements Cache {
   constructor(private readonly redis: Redis) {}
 
   async get<T>(key: string): Promise<T | null> {

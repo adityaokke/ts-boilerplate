@@ -1,8 +1,8 @@
 export * from './repositories/sample-repository.js';
 
 import { vi } from 'vitest';
-import type { Logger } from '@shared/domain/ports/logger.js';
-import type { EventPublisher } from '@shared/domain/ports/event-publisher.js';
+import type { Logger } from '@shared/domain/interfaces/logger.js';
+import type { EventPublisher } from '@shared/domain/interfaces/event-publisher.js';
 
 export const createMockLogger = (): Logger => ({
   info: vi.fn(),

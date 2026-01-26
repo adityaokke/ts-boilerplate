@@ -1,20 +1,20 @@
 import { ok, err, type Result } from '@shared/common/types/result.js';
 import { Sample } from '../../domain/entities/sample.js';
-import type { SampleRepositoryPort } from '../../domain/ports/outbound/sample-repository.js';
-import type { EventPublisher } from '@shared/domain/ports/event-publisher.js';
-import type { Logger } from '@shared/domain/ports/logger.js';
+import type { SampleRepository } from '../../domain/interfaces/sample-repository.js';
+import type { EventPublisher } from '@shared/domain/interfaces/index.js';
+import type { Logger } from '@shared/domain/interfaces/index.js';
 import type {
   CreateSample,
   CreateSampleInput,
   CreateSampleOutput,
-} from '../../domain/ports/inbound/create-sample.js';
+} from '../../domain/interfaces/create-sample.js';
 import { createSampleCreatedEvent } from '../../domain/events/sample-created.js';
 import { ValidationError, ConflictError } from '@shared/application/errors/index.js';
 import { createSampleSchema } from '../validators/create-sample.js';
 
-export class CreateSampleUseCase implements CreateSample {
+export class CreateSampleImpl implements CreateSample {
   constructor(
-    private readonly sampleRepository: SampleRepositoryPort,
+    private readonly sampleRepository: SampleRepository,
     private readonly eventPublisher: EventPublisher,
     private readonly logger: Logger,
   ) {}

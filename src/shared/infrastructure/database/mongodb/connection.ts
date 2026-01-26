@@ -1,6 +1,6 @@
 import { MongoClient, type Db } from 'mongodb';
-import { config } from '@shared/infrastructure/config/env.js';
-import type { Logger } from '@shared/domain/ports/logger.js';
+import { config } from '@shared/infrastructure/config/index.js';
+import type { Logger } from '@shared/domain/interfaces/index.js';
 
 let client: MongoClient | null = null;
 let db: Db | null = null;

@@ -1,7 +1,7 @@
 import { vi } from 'vitest';
-import type { SampleRepositoryPort } from '@modules/sample/domain/ports/outbound/sample-repository.js';
+import type { SampleRepository } from '@modules/sample/domain/interfaces/sample-repository.js';
 
-export const createMockSampleRepositoryPort = (): SampleRepositoryPort => ({
+export const createMockSampleRepository = (): SampleRepository => ({
   save: vi.fn(),
   findById: vi.fn(),
   findAll: vi.fn(),

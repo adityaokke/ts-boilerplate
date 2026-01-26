@@ -1,7 +1,7 @@
 import type { Express } from 'express';
 import type { Server } from 'http';
-import type { Logger } from '@shared/domain/ports/logger.js';
-import { config } from '@shared/infrastructure/config/env.js';
+import type { Logger } from '@shared/domain/interfaces/index.js';
+import { config } from '@shared/infrastructure/config/index.js';
 
 let server: Server | null = null;
 

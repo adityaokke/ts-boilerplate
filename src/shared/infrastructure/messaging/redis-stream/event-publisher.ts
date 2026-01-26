@@ -1,10 +1,10 @@
 import type { Redis } from 'ioredis';
 import type { DomainEvent } from '@shared/domain/events/domain-event.js';
-import type { EventPublisher } from '@shared/domain/ports/event-publisher.js';
-import type { Logger } from '@shared/domain/ports/logger.js';
-import { config } from '@shared/infrastructure/config/env.js';
+import type { EventPublisher } from '@shared/domain/interfaces/index.js';
+import type { Logger } from '@shared/domain/interfaces/index.js';
+import { config } from '@shared/infrastructure/config/index.js';
 
-export class RedisEventPublisher implements EventPublisher {
+export class EventPublisherImpl implements EventPublisher {
   private readonly streamKey = config.stream.key;
 
   constructor(
